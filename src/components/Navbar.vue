@@ -14,7 +14,7 @@
     <div class="nav-container">
       <div class="nav-logo">
         <div class="logo-container">
-          <img src="../images/logo.svg" class="logo-icon"
+          <img src="./images/logo.svg" class="logo-icon"
             alt="HSS Logo"></img>
         </div>
       </div>
