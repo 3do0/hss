@@ -25,13 +25,13 @@
             </span>
           </p>
           <div class="hero-buttons">
-            <button class="cta-button primary" @click="scrollToContact">
+            <a class="cta-button primary" @click="scrollToContact">
               <span>{{ getText("contactBtn") }}</span>
               <div class="button-icon">→</div>
-            </button>
-            <button class="cta-button secondary" @click="scrollToPortfolio">
+            </a>
+            <a class="cta-button secondary" @click="scrollToPortfolio">
               <span>{{ getText("portfolioBtn") }}</span>
-            </button>
+            </a>
           </div>
         </div>
 
@@ -102,7 +102,7 @@ export default {
     },
   },
   setup(props) {
-    const characterImage = "./src/assets/103.jpg";
+    const characterImage = "images/103.jpg";
 
     const texts = {
       ar: {

@@ -3,12 +3,13 @@
     <!-- Header -->
     <div class="sitemap-header">
       <div class="header-content">
-        <button class="back-btn" @click="$emit('close-sitemap')">
+        <a class="back-btn" @click="$emit('close-sitemap')">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="m15 18-6-6 6-6"/>
+            <path d="m9 6 6 6-6 6"/>
           </svg>
+
           <span>{{ getText('backToHome') }}</span>
-        </button>
+        </a>
         <div class="header-info">
           <h1 class="sitemap-title">{{ getText('title') }}</h1>
           <p class="sitemap-subtitle">{{ getText('subtitle') }}</p>
@@ -170,7 +171,7 @@ export default {
   background: white;
   border-bottom: 1px solid #e2e8f0;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  position: sticky;
+  position: static;
   top: 100px;
   z-index: 100;
 }

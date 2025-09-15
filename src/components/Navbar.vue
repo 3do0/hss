@@ -14,20 +14,8 @@
     <div class="nav-container">
       <div class="nav-logo">
         <div class="logo-container">
-          <div class="logo-icon">
-            <div class="logo-inner">
-              <svg viewBox="0 0 24 24" fill="currentColor" class="logo-svg">
-                <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                <path d="m2 17 10 5 10-5" />
-                <path d="m2 12 10 5 10-5" />
-              </svg>
-            </div>
-            <div class="logo-glow"></div>
-          </div>
-          <div class="logo-text">
-            <span class="logo-main">HSS</span>
-            <span class="logo-sub">{{ getText("logoSub") }}</span>
-          </div>
+          <img src="../images/logo.svg" class="logo-icon"
+            alt="HSS Logo"></img>
         </div>
       </div>
 
@@ -113,7 +101,7 @@
           <div class="lang-ripple"></div>
         </div>
 
-        <button class="contact-btn" @click="scrollToContact">
+        <a class="contact-btn" @click="scrollToContact">
           <span class="btn-text">{{ getText("contactUs") }}</span>
           <div class="btn-bg"></div>
           <div class="btn-shine"></div>
@@ -127,9 +115,9 @@
             stroke="currentColor"
             stroke-width="2"
           >
-            <path d="m9 18 6-6-6-6" />
+            <path d="m15 18-6-6 6-6" />
           </svg>
-        </button>
+        </a>
       </div>
 
       <div
@@ -173,7 +161,7 @@ export default {
 
     const texts = {
       ar: {
-        logoSub: "الحلول الهندسية الذكية",
+        logoSub: "حلول السرعة الفائقة",
         home: "الرئيسية",
         services: "الخدمات",
         about: "من نحن",
@@ -183,7 +171,7 @@ export default {
         contactUs: "تواصل معنا مجاناً",
       },
       en: {
-        logoSub: "Smart Engineering Solutions",
+        logoSub: "High Speed Solutions",
         home: "Home",
         services: "Services",
         about: "About",
@@ -367,31 +355,17 @@ export default {
 
 .logo-icon {
   position: relative;
-  background: linear-gradient(135deg, #2563eb, #3b82f6);
-  color: white;
-  width: 50px;
-  height: 50px;
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: hidden;
+  width: 200px;
 }
 
 .logo-icon:hover {
-  transform: scale(1.05) rotate(5deg);
-  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+  cursor : pointer;
 }
 
 .logo-inner {
   position: relative;
   z-index: 2;
   transition: transform 0.4s ease;
-}
-
-.logo-icon:hover .logo-inner {
-  transform: scale(1.1);
 }
 
 .logo-svg {
@@ -412,10 +386,6 @@ export default {
   z-index: 1;
 }
 
-.logo-icon:hover .logo-glow {
-  opacity: 0.3;
-  animation: pulse 2s ease-in-out infinite;
-}
 
 .logo-text {
   display: flex;
@@ -1023,11 +993,6 @@ export default {
     padding: 0 1rem;
   }
 
-  .logo-icon {
-    width: 42px;
-    height: 42px;
-  }
-
   .logo-svg {
     width: 22px;
     height: 22px;
@@ -1186,10 +1151,6 @@ export default {
     padding: 0 0.75rem;
   }
 
-  .logo-icon {
-    width: 35px;
-    height: 35px;
-  }
 
   .logo-svg {
     width: 18px;
@@ -1262,11 +1223,6 @@ export default {
 
   .logo-container {
     gap: 0.5rem;
-  }
-
-  .logo-icon {
-    width: 32px;
-    height: 32px;
   }
 
   .logo-svg {
