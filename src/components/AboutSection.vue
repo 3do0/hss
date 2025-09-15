@@ -26,7 +26,7 @@
         </div>
         <div class="about-visual">
           <div class="about-image">
-            <img src="../assets/hss-company.jpg" alt="فريق العمل">
+            <img :src="companyImage" alt="فريق العمل">
             <div class="image-overlay">
               <div class="play-button">
                 <svg viewBox="0 0 24 24" fill="currentColor">
@@ -69,6 +69,7 @@ export default {
     }
   },
   setup(props) {
+    const companyImage = "images/hss-company.jpg";
     const texts = {
       ar: {
         badge: 'من نحن',
@@ -144,6 +145,7 @@ export default {
     })
 
     return {
+      companyImage,
       stats,
       features,
       getText
