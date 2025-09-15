@@ -14,7 +14,7 @@
     <div class="nav-container">
       <div class="nav-logo">
         <div class="logo-container">
-          <img  class="logo-icon"
+          <img :src="logoIcon" class="logo-icon"
             alt="HSS Logo"></img>
         </div>
       </div>
@@ -158,6 +158,7 @@ export default {
     const isScrolled = ref(false);
     const isMobileMenuOpen = ref(false);
     const scrollProgress = ref(0);
+    const logoIcon = "images/logo.svg";
 
     const texts = {
       ar: {
@@ -250,6 +251,7 @@ export default {
     });
 
     return {
+      logoIcon,
       isScrolled,
       isMobileMenuOpen,
       scrollProgress,

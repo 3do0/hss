@@ -47,11 +47,11 @@ export default {
     }
 
     const partners = [
-      { name: 'Partner 1', image: './src/assets/customers/1.jpg' },
-      { name: 'Partner 2', image: './src/assets/customers/2.jpg' },
-      { name: 'Partner 3', image: './src/assets/customers/3.png' },
-      { name: 'Partner 4', image: './src/assets/customers/4.png' },
-      { name: 'Partner 5', image: './src/assets/customers/5.jpg' }
+      { name: 'Partner 1', image: 'images/customers/1.jpg' },
+      { name: 'Partner 2', image: 'images/customers/2.jpg' },
+      { name: 'Partner 3', image: 'images/customers/3.png' },
+      { name: 'Partner 4', image: 'images/customers/4.png' },
+      { name: 'Partner 5', image: 'images/customers/5.jpg' }
     ]
 
     const getText = (key) => {

@@ -51,22 +51,22 @@ export default {
 
     const clients = [
       {
-        logo: './src/assets/customers/1.jpg',
+        logo: 'images/customers/1.jpg',
         name: { ar: 'شركة التقنية المتقدمة', en: 'Advanced Technology Company' },
         project: { ar: 'تطوير نظام إدارة شامل', en: 'Comprehensive management system development' }
       },
       {
-        logo: './src/assets/customers/2.jpg',
+        logo: 'images/customers/2.jpg',
         name: { ar: 'مجموعة الابتكار الرقمي', en: 'Digital Innovation Group' },
         project: { ar: 'منصة تجارة إلكترونية متطورة', en: 'Advanced e-commerce platform' }
       },
       {
-        logo: './src/assets/customers/3.png',
+        logo: 'images/customers/3.png',
         name: { ar: 'شركة الحلول الذكية', en: 'Smart Solutions Company' },
         project: { ar: 'تطبيق جوال متعدد المنصات', en: 'Cross-platform mobile application' }
       },
       {
-        logo: './src/assets/customers/4.png',
+        logo: 'images/customers/4.png',
         name: { ar: 'مؤسسة التطوير التقني', en: 'Technical Development Foundation' },
         project: { ar: 'نظام إدارة المحتوى المخصص', en: 'Custom content management system' }
       }

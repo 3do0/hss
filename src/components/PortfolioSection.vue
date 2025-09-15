@@ -125,7 +125,7 @@ export default {
       {
         id: 1,
         category: 'websites',
-        image: './src/assets/products/e trade.jpg',
+        image: 'images/products/e trade.jpg',
         title: { ar: 'حلول التجارة الالكترونية', en: 'E-commerce Solutions' },
         description: { 
           ar: 'بناء وبرمجة وتصميم منصات وتطبيقات الأسواق الالكترونية, حلول فريدة ومبتكرة تجعلك تدير عملية البيع بسهولة تامة',
@@ -137,7 +137,7 @@ export default {
       {
         id: 2,
         category: 'apps',
-        image: './src/assets/products/raisaan.jpg',
+        image: 'images/products/raisaan.jpg',
         title: { ar: 'إدارة موارد المؤسسات ريسان', en: 'Raisaan Resource Management' },
         description: { 
           ar: 'أتمتة إدارة الشؤون المالية لشركتك ، وإدارة الموارد البشرية ، وإدارة علاقات العملاء ، والمشاريع ، والحسابات ، وغيرها',
@@ -149,7 +149,7 @@ export default {
       {
         id: 3,
         category: 'saas',
-        image: './src/assets/products/crm.jpg',
+        image: 'images/products/crm.jpg',
         title: { ar: 'إدارة علاقات العملاء السريعة', en: 'Quick Customer Relationship Management' },
         description: { 
           ar: 'قم بإدارة مبيعات عدد من المنتجات أو المناطق الجغرافية أو العمليات من نظام واحد لإدارة علاقات العملاء (CRM).',
@@ -161,7 +161,7 @@ export default {
       {
         id: 4,
         category: 'systems',
-        image: './src/assets/products/falconer.jpg',
+        image: 'images/products/falconer.jpg',
         title: { ar: 'منصة فالكونر', en: 'Falconer Platform' },
         description: { 
           ar: 'تواصل مع الأصدقاء! شارك اللحظات الجديدة في حياتك مع اصدقائك',
@@ -173,7 +173,7 @@ export default {
       {
         id: 5,
         category: 'saas',
-        image: './src/assets/products/hosting.jpg',
+        image: 'images/products/hosting.jpg',
         title: { ar: 'استضافات السرعة الفائقة', en: 'Ultra-Fast Hosting' },
         description: { 
           ar: 'استضافات ونطاقات متكاملة لأعمالك التجارية مع أكبر مزودي خدمات الاستضافة',
@@ -185,7 +185,7 @@ export default {
       {
         id: 6,
         category: 'websites',
-        image: './src/assets/products/hsssp.jpg',
+        image: 'images/products/hsssp.jpg',
         title: { ar: 'نظام حسّب', en: 'Hsssp System' },
         description: { 
           ar: 'موقع شركة متطور مع تصميم تفاعلي وإدارة محتوى متقدمة ونظام حجوزات',
