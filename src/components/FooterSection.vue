@@ -5,7 +5,7 @@
         <div class="footer-section">
           <div class="footer-logo">
             <div class="logo-container">
-              <img src="../assets/favicon.png" class="logo-icon"
+              <img :src="logoIcon" class="logo-icon"
             alt="HSS Logo">
               </img>
               <div class="logo-text">
@@ -179,6 +179,7 @@ export default {
     },
   },
   setup(props) {
+    const logoIcon = "images/favicon.png";
     const texts = {
       ar: {
         logoSub: "حلول السرعة الفائقة",
@@ -240,6 +241,7 @@ export default {
       window.dispatchEvent(new CustomEvent("show-sitemap-internal"));
     };
     return {
+      logoIcon,
       getText,
       showSitemap,
     };
