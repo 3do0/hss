@@ -26,13 +26,13 @@
             <div class="flag-container">
               <img
                 v-if="currentLang === 'ar'"
-                src="../assets/flags/uk.svg"
+                :src="UkFlagIcon"
                 alt="English"
                 class="flag-icon"
               />
               <img
                 v-else
-                src="../assets/flags/sa.svg"
+                :src="SaFlagIcon"
                 alt="العربية"
                 class="flag-icon"
               />
@@ -84,13 +84,13 @@
           <div class="flag-container">
             <img
               v-if="currentLang === 'ar'"
-              src="../assets/flags/uk.svg"
+              :src="UkFlagIcon"
               alt="English"
               class="flag-icon"
             />
             <img
               v-else
-              src="../assets/flags/sa.svg"
+             :src="SaFlagIcon"
               alt="العربية"
               class="flag-icon"
             />
@@ -159,6 +159,8 @@ export default {
     const isMobileMenuOpen = ref(false);
     const scrollProgress = ref(0);
     const logoIcon = "images/logo.svg";
+    const UkFlagIcon = "images/flags/uk.svg";
+    const SaFlagIcon = "images/flags/sa.svg";
 
     const texts = {
       ar: {
@@ -251,6 +253,8 @@ export default {
     });
 
     return {
+      UkFlagIcon,
+      SaFlagIcon,
       logoIcon,
       isScrolled,
       isMobileMenuOpen,
