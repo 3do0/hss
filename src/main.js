@@ -5,14 +5,14 @@ import "./style.css";
 const app = createApp(App);
 
 // Global event handling for sitemap
-window.addEventListener('show-sitemap-internal', () => {
+window.addEventListener("show-sitemap-internal", () => {
   app._instance.ctx.showSitemap();
 });
 
 const appInstance = app.mount("#app");
 
 // Make showSitemap available globally
-window.addEventListener('show-sitemap-internal', () => {
+window.addEventListener("show-sitemap-internal", () => {
   if (appInstance.showSitemap) {
     appInstance.showSitemap();
   }

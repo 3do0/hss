@@ -2,64 +2,77 @@
   <section class="portfolio" id="portfolio">
     <div class="portfolio-container">
       <div class="section-header">
-        <div class="section-badge">{{ getText('badge') }}</div>
-        <h2 class="section-title">{{ getText('title') }}</h2>
-        <p class="section-subtitle">{{ getText('subtitle') }}</p>
+        <div class="section-badge">{{ getText("badge") }}</div>
+        <h2 class="section-title">{{ getText("title") }}</h2>
+        <p class="section-subtitle">{{ getText("subtitle") }}</p>
       </div>
       <div class="portfolio-filters">
-        <button 
-          class="filter-btn" 
+        <button
+          class="filter-btn"
           :class="{ active: activeFilter === 'all' }"
           @click="setFilter('all')"
         >
-          {{ getText('all') }}
+          {{ getText("all") }}
         </button>
-        <button 
-          class="filter-btn" 
+        <button
+          class="filter-btn"
           :class="{ active: activeFilter === 'websites' }"
           @click="setFilter('websites')"
         >
-          {{ getText('websites') }}
+          {{ getText("websites") }}
         </button>
-        <button 
-          class="filter-btn" 
+        <button
+          class="filter-btn"
           :class="{ active: activeFilter === 'apps' }"
           @click="setFilter('apps')"
         >
-          {{ getText('apps') }}
+          {{ getText("apps") }}
         </button>
-        <button 
-          class="filter-btn" 
+        <button
+          class="filter-btn"
           :class="{ active: activeFilter === 'saas' }"
           @click="setFilter('saas')"
         >
-          {{ getText('saas') }}
+          {{ getText("saas") }}
         </button>
-        <button 
-          class="filter-btn" 
+        <button
+          class="filter-btn"
           :class="{ active: activeFilter === 'systems' }"
           @click="setFilter('systems')"
         >
-          {{ getText('systems') }}
+          {{ getText("systems") }}
         </button>
       </div>
       <div class="portfolio-grid">
-        <div 
-          class="portfolio-item" 
-          v-for="(item, index) in filteredPortfolio" 
+        <div
+          class="portfolio-item"
+          v-for="(item, index) in filteredPortfolio"
           :key="item.id"
           :style="{ animationDelay: `${index * 0.1}s` }"
         >
           <div class="portfolio-card">
             <div class="portfolio-image">
-              <img :src="item.image" :alt="item.title[currentLang]" loading="lazy">
+              <img
+                :src="item.image"
+                :alt="item.title[currentLang]"
+                loading="lazy"
+              />
               <div class="portfolio-overlay">
-                <div class="portfolio-category">{{ getCategoryName(item.category) }}</div>
+                <div class="portfolio-category">
+                  {{ getCategoryName(item.category) }}
+                </div>
                 <a :href="item.link" class="portfolio-link" target="_blank">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-                    <polyline points="15,3 21,3 21,9"/>
-                    <line x1="10" y1="14" x2="21" y2="3"/>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+                    />
+                    <polyline points="15,3 21,3 21,9" />
+                    <line x1="10" y1="14" x2="21" y2="3" />
                   </svg>
                 </a>
               </div>
@@ -68,12 +81,12 @@
               <h3>{{ item.title[currentLang] }}</h3>
               <p>{{ item.description[currentLang] }}</p>
               <div class="portfolio-tech">
-                <span 
-                  class="tech-tag" 
-                  v-for="tech in item.technologies" 
-                  :key="tech"
+                <span
+                  class="tech-tag"
+                  v-for="feature in item.features[currentLang]"
+                  :key="feature"
                 >
-                  {{ tech }}
+                  {{ feature }}
                 </span>
               </div>
             </div>
@@ -85,151 +98,237 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue'
+import { ref, computed } from "vue";
 
 export default {
-  name: 'PortfolioSection',
+  name: "PortfolioSection",
   props: {
     currentLang: {
       type: String,
-      default: 'ar'
-    }
+      default: "ar",
+    },
   },
   setup(props) {
-    const activeFilter = ref('all')
+    const activeFilter = ref("all");
 
     const texts = {
       ar: {
-        badge: 'أعمالنا',
-        title: 'مشاريع مميزة ومنصات SaaS',
-        subtitle: 'نفخر بإنجازاتنا في تطوير المواقع والتطبيقات ومنصات SaaS المتطورة',
-        all: 'الكل',
-        websites: 'المواقع',
-        apps: 'التطبيقات',
-        saas: 'منصات SaaS',
-        systems: 'الأنظمة'
+        badge: "أعمالنا",
+        title: "مشاريع مميزة ومنصات SaaS",
+        subtitle:
+          "نفخر بإنجازاتنا في تطوير المواقع والتطبيقات ومنصات SaaS المتطورة",
+        all: "الكل",
+        websites: "المواقع",
+        apps: "التطبيقات",
+        saas: "منصات SaaS",
+        systems: "الأنظمة",
       },
       en: {
-        badge: 'Our Work',
-        title: 'Featured Projects & SaaS Platforms',
-        subtitle: 'We are proud of our achievements in developing websites, applications, and advanced SaaS platforms',
-        all: 'All',
-        websites: 'Websites',
-        apps: 'Apps',
-        saas: 'SaaS Platforms',
-        systems: 'Systems'
-      }
-    }
+        badge: "Our Work",
+        title: "Featured Projects & SaaS Platforms",
+        subtitle:
+          "We are proud of our achievements in developing websites, applications, and advanced SaaS platforms",
+        all: "All",
+        websites: "Websites",
+        apps: "Apps",
+        saas: "SaaS Platforms",
+        systems: "Systems",
+      },
+    };
 
     const portfolio = [
       {
         id: 1,
-        category: 'websites',
-        image: 'images/products/e trade.jpg',
-        title: { ar: 'حلول التجارة الالكترونية', en: 'E-commerce Solutions' },
-        description: { 
-          ar: 'بناء وبرمجة وتصميم منصات وتطبيقات الأسواق الالكترونية, حلول فريدة ومبتكرة تجعلك تدير عملية البيع بسهولة تامة',
-          en: 'Building and programming e-commerce platforms and applications, unique and innovative solutions that make it easy to manage the sales process'
+        category: "websites",
+        image: "images/products/e trade.jpg",
+        title: { ar: "حلول التجارة الالكترونية", en: "E-commerce Solutions" },
+        description: {
+          ar: "بناء وبرمجة وتصميم منصات وتطبيقات الأسواق الالكترونية, حلول فريدة ومبتكرة تجعلك تدير عملية البيع بسهولة تامة",
+          en: "Building and programming e-commerce platforms and applications, unique and innovative solutions that make it easy to manage the sales process",
         },
-        technologies: ['React', 'Node.js', 'MongoDB', 'Stripe'],
-        link: 'http://highspeedetrade.com/'
+        features: {
+          ar: [
+            "أمان عالي",
+            "واجهات سهلة الاستخدام",
+            "تكامل مرن مع الدفع",
+            "تحليلات وتقارير دقيقة",
+          ],
+          en: [
+            "High Security",
+            "User-friendly Interfaces",
+            "Flexible Payment Integration",
+            "Accurate Analytics",
+          ],
+        },
+        link: "http://highspeedetrade.com/",
       },
       {
         id: 2,
-        category: 'apps',
-        image: 'images/products/raisaan.jpg',
-        title: { ar: 'إدارة موارد المؤسسات ريسان', en: 'Raisaan Resource Management' },
-        description: { 
-          ar: 'أتمتة إدارة الشؤون المالية لشركتك ، وإدارة الموارد البشرية ، وإدارة علاقات العملاء ، والمشاريع ، والحسابات ، وغيرها',
-          en: 'Automating financial management for your company, human resource management, customer relationship management, projects, accounts, and more'
+        category: "apps",
+        image: "images/products/raisaan.jpg",
+        title: {
+          ar: "إدارة موارد المؤسسات ريسان",
+          en: "Raisaan Resource Management",
         },
-        technologies: ['Flutter', 'Firebase', 'REST API'],
-        link: 'https://raisaan.com/'
+        description: {
+          ar: "أتمتة إدارة الشؤون المالية لشركتك ، وإدارة الموارد البشرية ، وإدارة علاقات العملاء ، والمشاريع ، والحسابات ، وغيرها",
+          en: "Automating financial management for your company, human resource management, customer relationship management, projects, accounts, and more",
+        },
+        features: {
+          ar: [
+            "أداء سريع",
+            "إشعارات فورية",
+            "قابلية التوسع",
+            "تجربة مستخدم سلسة",
+          ],
+          en: [
+            "High Performance",
+            "Push Notifications",
+            "Scalability",
+            "Smooth UX",
+          ],
+        },
+        link: "https://raisaan.com/",
       },
       {
         id: 3,
-        category: 'saas',
-        image: 'images/products/crm.jpg',
-        title: { ar: 'إدارة علاقات العملاء السريعة', en: 'Quick Customer Relationship Management' },
-        description: { 
-          ar: 'قم بإدارة مبيعات عدد من المنتجات أو المناطق الجغرافية أو العمليات من نظام واحد لإدارة علاقات العملاء (CRM).',
-          en: 'Manage sales of multiple products or geographic areas or processes from a single system for customer relationship management (CRM).'
+        category: "saas",
+        image: "images/products/crm.jpg",
+        title: {
+          ar: "إدارة علاقات العملاء السريعة",
+          en: "Quick Customer Relationship Management",
         },
-        technologies: ['Vue.js', 'Laravel', 'MySQL', 'Redis'],
-        link: 'https://highspeedcrm.com/signin'
+        description: {
+          ar: "قم بإدارة مبيعات عدد من المنتجات أو المناطق الجغرافية أو العمليات من نظام واحد لإدارة علاقات العملاء (CRM).",
+          en: "Manage sales of multiple products or geographic areas or processes from a single system for customer relationship management (CRM).",
+        },
+        features: {
+          ar: [
+            "إدارة مركزية",
+            "تقارير ومؤشرات أداء",
+            "صلاحيات وأدوار آمنة",
+            "تكامل مع أنظمة خارجية",
+          ],
+          en: [
+            "Centralized Management",
+            "Reports & KPIs",
+            "Secure Roles & Permissions",
+            "External Integrations",
+          ],
+        },
+        link: "https://highspeedcrm.com/signin",
       },
       {
         id: 4,
-        category: 'systems',
-        image: 'images/products/falconer.jpg',
-        title: { ar: 'منصة فالكونر', en: 'Falconer Platform' },
-        description: { 
-          ar: 'تواصل مع الأصدقاء! شارك اللحظات الجديدة في حياتك مع اصدقائك',
-          en: 'Connect with friends! Share your moments with your friends'
+        category: "systems",
+        image: "images/products/falconer.jpg",
+        title: { ar: "منصة فالكونر", en: "Falconer Platform" },
+        description: {
+          ar: "تواصل مع الأصدقاء! شارك اللحظات الجديدة في حياتك مع اصدقائك",
+          en: "Connect with friends! Share your moments with your friends",
         },
-        technologies: ['Angular', 'ASP.NET Core', 'SQL Server', 'SignalR'],
-        link: 'https://falconer.app/?lang=english'
+        features: {
+          ar: [
+            "زمن استجابة منخفض",
+            "تفاعلية عالية",
+            "حماية البيانات والخصوصية",
+            "موثوقية واستقرار",
+          ],
+          en: [
+            "Low Latency",
+            "High Interactivity",
+            "Data Privacy & Protection",
+            "Reliability",
+          ],
+        },
+        link: "https://falconer.app/?lang=english",
       },
       {
         id: 5,
-        category: 'saas',
-        image: 'images/products/hosting.jpg',
-        title: { ar: 'استضافات السرعة الفائقة', en: 'Ultra-Fast Hosting' },
-        description: { 
-          ar: 'استضافات ونطاقات متكاملة لأعمالك التجارية مع أكبر مزودي خدمات الاستضافة',
-          en: 'Comprehensive hosting and domains for your business with the largest hosting providers'
+        category: "saas",
+        image: "images/products/hosting.jpg",
+        title: { ar: "استضافات السرعة الفائقة", en: "Ultra-Fast Hosting" },
+        description: {
+          ar: "استضافات ونطاقات متكاملة لأعمالك التجارية مع أكبر مزودي خدمات الاستضافة",
+          en: "Comprehensive hosting and domains for your business with the largest hosting providers",
         },
-        technologies: ['React', 'Django', 'PostgreSQL', 'WebRTC'],
-        link: 'https://www.highspeedhosts.com/'
+        features: {
+          ar: [
+            "سرعة وأداء عالي",
+            "uptime %99.9",
+            "نسخ احتياطي واستعادة",
+            "دعم فني 24/7",
+          ],
+          en: [
+            "High Speed & Performance",
+            "99.9% Uptime",
+            "Backup & Restore",
+            "24/7 Support",
+          ],
+        },
+        link: "https://www.highspeedhosts.com/",
       },
       {
         id: 6,
-        category: 'websites',
-        image: 'images/products/hsssp.jpg',
-        title: { ar: 'نظام حسّب', en: 'Hsssp System' },
-        description: { 
-          ar: 'موقع شركة متطور مع تصميم تفاعلي وإدارة محتوى متقدمة ونظام حجوزات',
-          en: 'Advanced corporate website with interactive design, advanced content management, and booking system'
+        category: "websites",
+        image: "images/products/hsssp.jpg",
+        title: { ar: "نظام حسّب", en: "Hsssp System" },
+        description: {
+          ar: "موقع شركة متطور مع تصميم تفاعلي وإدارة محتوى متقدمة ونظام حجوزات",
+          en: "Advanced corporate website with interactive design, advanced content management, and booking system",
         },
-        technologies: ['Next.js', 'Strapi', 'GraphQL', 'Tailwind CSS'],
-        link: 'https://hsssp.com/'
-      }
-    ]
+        features: {
+          ar: [
+            "إدارة محتوى سهلة",
+            "تحسين محركات البحث",
+            "تصميم متجاوب",
+            "أمان وحماية",
+          ],
+          en: [
+            "Easy CMS",
+            "SEO Optimized",
+            "Responsive Design",
+            "Security & Protection",
+          ],
+        },
+        link: "https://hsssp.com/",
+      },
+    ];
 
     const filteredPortfolio = computed(() => {
-      if (activeFilter.value === 'all') {
-        return portfolio
+      if (activeFilter.value === "all") {
+        return portfolio;
       }
-      return portfolio.filter(item => item.category === activeFilter.value)
-    })
+      return portfolio.filter((item) => item.category === activeFilter.value);
+    });
 
     const getText = (key) => {
-      return texts[props.currentLang][key] || texts.ar[key]
-    }
+      return texts[props.currentLang][key] || texts.ar[key];
+    };
 
     const getCategoryName = (category) => {
       const categories = {
-        websites: { ar: 'المواقع', en: 'Websites' },
-        apps: { ar: 'التطبيقات', en: 'Apps' },
-        saas: { ar: 'منصات SaaS', en: 'SaaS Platforms' },
-        systems: { ar: 'الأنظمة', en: 'Systems' }
-      }
-      return categories[category][props.currentLang]
-    }
+        websites: { ar: "المواقع", en: "Websites" },
+        apps: { ar: "التطبيقات", en: "Apps" },
+        saas: { ar: "منصات SaaS", en: "SaaS Platforms" },
+        systems: { ar: "الأنظمة", en: "Systems" },
+      };
+      return categories[category][props.currentLang];
+    };
 
     const setFilter = (filter) => {
-      activeFilter.value = filter
-    }
+      activeFilter.value = filter;
+    };
 
     return {
       activeFilter,
       filteredPortfolio,
       getText,
       getCategoryName,
-      setFilter
-    }
-  }
-}
+      setFilter,
+    };
+  },
+};
 </script>
 
 <style scoped>
@@ -445,15 +544,15 @@ export default {
   .portfolio-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .section-title {
     font-size: 2rem;
   }
-  
+
   .portfolio-filters {
     gap: 0.5rem;
   }
-  
+
   .filter-btn {
     padding: 0.5rem 1rem;
     font-size: 0.875rem;
@@ -464,11 +563,11 @@ export default {
   .portfolio-container {
     padding: 0 1rem;
   }
-  
+
   .section-title {
     font-size: 1.75rem;
   }
-  
+
   .portfolio-content {
     padding: 1.5rem;
   }

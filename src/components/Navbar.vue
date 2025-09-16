@@ -20,29 +20,7 @@
       </div>
 
       <ul class="nav-menu" :class="{ 'mobile-active': isMobileMenuOpen }">
-        <li class="mobile-lang">
-          <div class="language-switcher" @click="toggleLanguage">
-            <div class="lang-bg"></div>
-            <div class="flag-container">
-              <img
-                v-if="currentLang === 'ar'"
-                :src="UkFlagIcon"
-                alt="English"
-                class="flag-icon"
-              />
-              <img
-                v-else
-                :src="SaFlagIcon"
-                alt="العربية"
-                class="flag-icon"
-              />
-            </div>
-            <span class="lang-text">{{
-              currentLang === "ar" ? "EN" : "عربي"
-            }}</span>
-            <div class="lang-ripple"></div>
-          </div>
-        </li>
+        <div class="nav-menu-content">
         <li
           v-for="(item, index) in menuItems"
           :key="item.href"
@@ -56,25 +34,47 @@
             </div>
           </a>
         </li>
-        <!-- Mobile-only Contact Button inside dropdown -->
-        <li class="mobile-contact">
-          <button class="contact-btn" @click="scrollToContact">
-            <span class="btn-text">{{ getText("contactUs") }}</span>
-            <div class="btn-bg"></div>
-            <div class="btn-shine"></div>
-            <div class="btn-particles">
-              <span class="btn-particle" v-for="n in 4" :key="n"></span>
+        </div>
+        <!-- Mobile actions row: language + contact side-by-side -->
+        <li class="mobile-actions">
+          <div class="actions-inline">
+            <div class="language-switcher" @click="toggleLanguage">
+              <div class="lang-bg"></div>
+              <div class="flag-container">
+                <img
+                  v-if="currentLang === 'ar'"
+                  :src="UkFlagIcon"
+                  alt="English"
+                  class="flag-icon"
+                />
+                <img
+                  v-else
+                  :src="SaFlagIcon"
+                  alt="العربية"
+                  class="flag-icon"
+                />
+              </div>
+              <span class="lang-text">{{ currentLang === "ar" ? "EN" : "عربي" }}</span>
+              <div class="lang-ripple"></div>
             </div>
-            <svg
-              class="btn-arrow"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path d="m9 18 6-6-6-6" />
-            </svg>
-          </button>
+            <button class="contact-btn" @click="scrollToContact">
+              <span class="btn-text">{{ getText("contactUs") }}</span>
+              <div class="btn-bg"></div>
+              <div class="btn-shine"></div>
+              <div class="btn-particles">
+                <span class="btn-particle" v-for="n in 4" :key="n"></span>
+              </div>
+              <svg
+                class="btn-arrow"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="m9 18 6-6-6-6" />
+              </svg>
+            </button>
+          </div>
         </li>
       </ul>
 
@@ -232,8 +232,34 @@ export default {
       );
     };
 
+    // Close mobile menu on click outside (when clicking overlay already handled). Also close when clicking any link handled.
+    // Ensure body scroll lock toggles with menu state changes triggered externally.
+    onMounted(() => {
+      const observer = new MutationObserver(() => {
+        document.body.style.overflow = isMobileMenuOpen.value ? "hidden" : "";
+      });
+      observer.observe(document.body, { attributes: true, attributeFilter: ["class"] });
+
+      onUnmounted(() => {
+        observer.disconnect();
+      });
+    });
+
     onMounted(() => {
       window.addEventListener("scroll", handleScroll);
+      const onKeyDown = (e) => {
+        if (e.key === "Escape") {
+          closeMobileMenu();
+        }
+      };
+      window.addEventListener("keydown", onKeyDown);
+      // Close on resize to desktop
+      const onResize = () => {
+        if (window.innerWidth > 1024 && isMobileMenuOpen.value) {
+          closeMobileMenu();
+        }
+      };
+      window.addEventListener("resize", onResize);
 
       // Smooth scrolling for navigation links
       document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
@@ -244,6 +270,12 @@ export default {
             target.scrollIntoView({ behavior: "smooth", block: "start" });
           }
         });
+      });
+
+      // Cleanup listeners on unmount
+      onUnmounted(() => {
+        window.removeEventListener("keydown", onKeyDown);
+        window.removeEventListener("resize", onResize);
       });
     });
 
@@ -430,6 +462,10 @@ export default {
   align-items: center;
 }
 
+.mobile-close-item {
+  display: none;
+}
+
 .nav-menu li {
   animation: slideInDown 0.6s ease forwards;
   animation-delay: var(--delay);
@@ -524,6 +560,10 @@ export default {
 }
 
 .mobile-lang {
+  display: none;
+}
+
+.mobile-actions {
   display: none;
 }
 
@@ -893,6 +933,38 @@ export default {
   }
 }
 
+@media (min-width: 1025px) {
+  /* Revert desktop/tablet layout exactly as before */
+  .nav-menu {
+    position: static;
+    right: auto;
+    width: auto;
+    max-width: none;
+    height: auto;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: initial;
+    align-items: center;
+    padding: 0;
+    transition: none;
+    box-shadow: none;
+    border: 0;
+    border-radius: 0;
+    z-index: auto;
+    overflow: visible;
+  }
+
+  /* Make the wrapper neutral on desktop so items behave as before */
+  .nav-menu-content {
+    display: contents;
+    overflow: visible;
+    padding: 0;
+  }
+}
+
 @media (max-width: 1024px) {
   .nav-container {
     padding: 0 1.25rem;
@@ -926,24 +998,63 @@ export default {
     width: 86%;
     max-width: 420px;
     height: 100vh;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-    flex-direction: column;
-    justify-content: flex-start;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    display: grid;
+    grid-template-rows: auto 1fr auto;
     align-items: stretch;
-    padding: 1.5rem;
-    padding-top: 6rem;
-    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 1rem;
+    padding-top: 5.5rem;
+    transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
     border-left: 1px solid rgba(226, 232, 240, 0.6);
     border-top-left-radius: 16px;
     border-bottom-left-radius: 16px;
     z-index: 999;
+    overflow: hidden;
   }
 
   .nav-menu.mobile-active {
     right: 0;
+  }
+
+  .mobile-close-item {
+    display: block;
+    position: absolute;
+    top: 1rem;
+    inset-inline-end: 1rem;
+  }
+
+  .mobile-close {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: rgba(148, 163, 184, 0.15);
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .mobile-close:hover {
+    background: rgba(148, 163, 184, 0.25);
+    transform: translateY(-1px);
+  }
+  .close-line {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 18px;
+    height: 2px;
+    background: #334155;
+    transform-origin: center;
+    transition: background 0.2s ease;
+  }
+  .close-line-1 {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  .close-line-2 {
+    transform: translate(-50%, -50%) rotate(-45deg);
   }
 
   .nav-menu li {
@@ -951,7 +1062,14 @@ export default {
     width: 100%;
     opacity: 0;
     transform: translateX(30px);
-    animation: slideInMobile 0.4s ease forwards;
+    animation: slideInMobile 0.3s ease forwards;
+  }
+
+  /* prevent animation on close button */
+  .nav-menu li.no-animate {
+    animation: none;
+    opacity: 1;
+    transform: none;
   }
 
   .nav-menu li + li {
@@ -984,13 +1102,54 @@ export default {
   }
 
   .nav-link {
-    padding: 1rem 1.25rem;
-    border-radius: 12px;
-    font-size: 1.05rem;
+    padding: 0.85rem 1rem;
+    border-radius: 10px;
+    font-size: 0.98rem;
     width: 100%;
     text-align: start;
     margin: 0;
-    border: 2px solid transparent;
+    border: 1px solid transparent;
+  }
+
+  /* Scrollable middle area */
+  .nav-menu {
+    --actionsHeight: 64px;
+  }
+  .nav-menu .mobile-actions {
+    position: sticky;
+    bottom: 0;
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(12px);
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(226,232,240,0.6);
+  }
+  /* reserve for future middle list items container rules */
+  .nav-menu {
+    overflow: hidden;
+  }
+  .nav-menu-content {
+    overflow-y: auto;
+    max-height: calc(100vh - 5.5rem - 80px);
+    padding-right: 0.25rem;
+  }
+
+  .mobile-actions {
+    display: block;
+    margin-top: auto;
+  }
+  .actions-inline {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    align-items: center;
+  }
+  .actions-inline .language-switcher {
+    width: 100%;
+    justify-content: center;
+  }
+  .actions-inline .contact-btn {
+    width: 100%;
+    justify-content: center;
   }
 }
 
@@ -1018,16 +1177,17 @@ export default {
     right: -100%;
     width: 100%;
     height: 100vh;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-    flex-direction: column;
-    justify-content: center;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    display: grid;
+    grid-template-rows: 1fr auto;
     align-items: stretch;
-    padding: 2rem;
-    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 1rem;
+    transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
     z-index: 999;
+    overflow: hidden;
   }
 
   .nav-menu.mobile-active {
@@ -1035,11 +1195,11 @@ export default {
   }
 
   .nav-menu li {
-    margin: 1rem 0;
+    margin: 0.6rem 0;
     width: 100%;
     opacity: 0;
     transform: translateX(30px);
-    animation: slideInMobile 0.4s ease forwards;
+    animation: slideInMobile 0.3s ease forwards;
   }
 
   .nav-menu.mobile-active li:nth-child(1) {
@@ -1072,17 +1232,17 @@ export default {
   }
 
   .nav-link {
-    padding: 1.5rem 2rem;
-    border-radius: 15px;
-    font-size: 1.2rem;
+    padding: 0.95rem 1.25rem;
+    border-radius: 12px;
+    font-size: 1.05rem;
     width: 100%;
     text-align: center;
     position: relative;
     overflow: hidden;
     font-weight: 600;
     color: #1e3a8a;
-    border: 2px solid transparent;
-    margin: 0.5rem 0;
+    border: 1px solid transparent;
+    margin: 0.35rem 0;
   }
 
   .nav-link:hover {
@@ -1116,6 +1276,16 @@ export default {
   .mobile-overlay.active {
     opacity: 1;
     visibility: visible;
+  }
+  .nav-menu-content {
+    overflow-y: auto;
+    padding: 0.5rem 0.25rem 0.75rem 0.25rem;
+  }
+  .mobile-actions {
+    padding-top: 0.75rem;
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(226,232,240,0.6);
   }
 }
 

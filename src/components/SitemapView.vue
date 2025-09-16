@@ -140,7 +140,7 @@ export default {
     const getText = (key) => texts[props.currentLang][key] || texts.ar[key]
 
     // Enhanced embed URL for better interactivity
-    const embedSrc = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.123456789!2d39.8262!3d21.4225!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjHCsDI1JzIxLjAiTiAzOcKwNDknMzQuMyJF!5e0!3m2!1sen!2ssa!4v1234567890123!5m2!1sen!2ssa&output=embed`
+    const embedSrc = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3625.703079999237!2d39.952400!3d21.462223!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjHCsDI3JzQ0LjAiTiAzOcKwNTcnODguNyJF!5e0!3m2!1sen!2ssa!4v1694867200000!5m2!1sen!2ssa";
     const mapUrl = MAP_SHORT_URL
 
     onMounted(() => {
