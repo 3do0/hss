@@ -14,16 +14,8 @@
         </div>
       </div>
       <div class="slider-controls">
-        <button class="slider-btn prev" @click="slidePartners('prev')" aria-label="Previous">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="15,18 9,12 15,6"></polyline>
-          </svg>
-        </button>
-        <button class="slider-btn next" @click="slidePartners('next')" aria-label="Next">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="9,18 15,12 9,6"></polyline>
-          </svg>
-        </button>
+        <button class="slider-btn prev" @click="slidePartners('prev')">‹</button>
+        <button class="slider-btn next" @click="slidePartners('next')">›</button>
       </div>
     </div>
   </section>
@@ -44,7 +36,6 @@ export default {
     const partnersTrack = ref(null)
     let currentPosition = 0
     let autoSlideInterval = null
-    let isAnimating = false
 
     const texts = {
       ar: {
@@ -68,10 +59,9 @@ export default {
     }
 
     const slidePartners = (direction) => {
-      if (!partnersTrack.value || isAnimating) return
+      if (!partnersTrack.value) return
 
-      isAnimating = true
-      const slideWidth = 200 // Adjusted for better mobile performance
+      const slideWidth = 220
       const maxSlides = partners.length
       
       if (direction === 'next') {
@@ -87,18 +77,12 @@ export default {
       }
 
       partnersTrack.value.style.transform = `translateX(${currentPosition}px)`
-      
-      // Reset animation flag after transition
-      setTimeout(() => {
-        isAnimating = false
-      }, 300)
     }
 
     const startAutoSlide = () => {
-      if (autoSlideInterval) return
       autoSlideInterval = setInterval(() => {
         slidePartners('next')
-      }, 4000) // Increased interval for better performance
+      }, 3000)
     }
 
     const stopAutoSlide = () => {
@@ -109,14 +93,11 @@ export default {
     }
 
     onMounted(() => {
-      // Start auto slide after a delay
-      setTimeout(() => {
-        startAutoSlide()
-      }, 1000)
+      startAutoSlide()
       
       if (partnersTrack.value) {
-        partnersTrack.value.addEventListener('mouseenter', stopAutoSlide, { passive: true })
-        partnersTrack.value.addEventListener('mouseleave', startAutoSlide, { passive: true })
+        partnersTrack.value.addEventListener('mouseenter', stopAutoSlide)
+        partnersTrack.value.addEventListener('mouseleave', startAutoSlide)
       }
     })
 
@@ -154,9 +135,7 @@ export default {
   font-weight: 700;
   margin-bottom: 3rem;
   color: #1e3a8a;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.6s ease forwards;
+  animation: fadeInUp 1s ease-out;
 }
 
 .partners-slider {
@@ -164,14 +143,17 @@ export default {
   margin: 0 auto;
   max-width: 100%;
   border-radius: 1rem;
-  overflow: hidden;
 }
 
 .partners-track {
   display: flex;
-  gap: 1.5rem;
-  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  will-change: transform;
+  gap: 2rem;
+  transition: transform 0.5s ease;
+  animation: slideInfinite 30s linear infinite;
+}
+
+.partners-track:hover {
+  animation-play-state: paused;
 }
 
 .partner-logo {
@@ -179,33 +161,31 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
+  padding: 1.5rem;
   background: white;
-  border-radius: 0.75rem;
+  border-radius: 1rem;
   transition: all 0.3s ease;
-  border: 1px solid #e2e8f0;
-  min-width: 160px;
-  height: 80px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border: 2px solid #e2e8f0;
+  min-width: 180px;
+  height: 100px;
+  border-color: #2563eb;
 }
 
 .partner-logo:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-  border-color: #2563eb;
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
 }
 
 .partner-logo img {
   max-width: 100%;
-  max-height: 50px;
+  max-height: 60px;
   object-fit: contain;
+  filter: grayscale(0%);
   transition: all 0.3s ease;
-  filter: grayscale(20%);
 }
 
 .partner-logo:hover img {
-  filter: grayscale(0%);
-  transform: scale(1.05);
+  filter: grayscale(50%);
 }
 
 .slider-controls {
@@ -216,39 +196,40 @@ export default {
 }
 
 .slider-btn {
-  width: 45px;
-  height: 45px;
+  width: 50px;
+  height: 50px;
   border: none;
   background: white;
-  border: 1px solid #e2e8f0;
+  border: 2px solid #e2e8f0;
   border-radius: 50%;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 1.5rem;
   color: #64748b;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
 .slider-btn:hover {
   background: #2563eb;
   color: white;
   border-color: #2563eb;
-  transform: scale(1.05);
-  box-shadow: 0 4px 8px rgba(37, 99, 235, 0.2);
+  transform: scale(1.1);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
 
-.slider-btn:active {
-  transform: scale(0.95);
-}
-
-.slider-btn svg {
-  width: 18px;
-  height: 18px;
+@keyframes slideInfinite {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 @keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
   to {
     opacity: 1;
     transform: translateY(0);
@@ -256,42 +237,28 @@ export default {
 }
 
 @media (max-width: 768px) {
-  .partners {
-    padding: 3rem 0;
-  }
-  
   .partners-title {
     font-size: 2rem;
-    margin-bottom: 2rem;
   }
   
   .partners-track {
-    gap: 1rem;
+    gap: 1.5rem;
   }
   
   .partner-logo {
-    min-width: 140px;
-    height: 70px;
-    padding: 0.75rem;
-  }
-  
-  .partner-logo img {
-    max-height: 40px;
+    min-width: 150px;
+    height: 80px;
+    padding: 1rem;
   }
   
   .slider-controls {
-    gap: 0.75rem;
-    margin-top: 1.5rem;
+    gap: 0.5rem;
   }
   
   .slider-btn {
-    width: 40px;
-    height: 40px;
-  }
-  
-  .slider-btn svg {
-    width: 16px;
-    height: 16px;
+    width: 45px;
+    height: 45px;
+    font-size: 1.25rem;
   }
 }
 
@@ -306,23 +273,8 @@ export default {
   
   .partner-logo {
     min-width: 120px;
-    height: 60px;
-    padding: 0.5rem;
-  }
-  
-  .partner-logo img {
-    max-height: 35px;
-  }
-}
-
-/* Performance optimizations for mobile */
-@media (max-width: 768px) {
-  .partners-track {
-    transition-duration: 0.25s;
-  }
-  
-  .partner-logo {
-    will-change: transform;
+    height: 70px;
+    padding: 0.75rem;
   }
 }
 </style>
