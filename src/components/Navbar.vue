@@ -35,9 +35,9 @@
           </a>
         </li>
         </div>
-        <!-- Mobile actions row: language + contact side-by-side -->
+        <!-- Mobile actions: language and contact stacked full width below menu -->
         <li class="mobile-actions">
-          <div class="actions-inline">
+          <div class="actions-stacked">
             <div class="language-switcher" @click="toggleLanguage">
               <div class="lang-bg"></div>
               <div class="flag-container">
@@ -1137,19 +1137,21 @@ export default {
     display: block;
     margin-top: auto;
   }
-  .actions-inline {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+  .actions-stacked {
+    display: flex;
+    flex-direction: column;
     gap: 0.75rem;
-    align-items: center;
+    align-items: stretch;
+    width: 100%;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
   }
-  .actions-inline .language-switcher {
+  .actions-stacked .language-switcher,
+  .actions-stacked .contact-btn {
     width: 100%;
     justify-content: center;
-  }
-  .actions-inline .contact-btn {
-    width: 100%;
-    justify-content: center;
+    min-width: 0;
+    box-sizing: border-box;
   }
 }
 

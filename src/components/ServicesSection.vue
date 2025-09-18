@@ -231,7 +231,7 @@ export default {
   overflow: hidden;
   opacity: 0;
   transform: translateY(30px);
-  animation: fadeInUp 0.5s ease forwards;
+  animation: fadeInUp 0.6s ease forwards;
 }
 
 .service-card::before {
@@ -247,7 +247,7 @@ export default {
 }
 
 .service-card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-10px);
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
 }
 
@@ -269,7 +269,7 @@ export default {
 }
 
 .service-card:hover .service-icon {
-  transform: scale(1.05);
+  transform: scale(1.1) rotate(5deg);
 }
 
 .service-icon svg {
@@ -330,7 +330,6 @@ export default {
   
   .service-card {
     padding: 2rem;
-    animation-duration: 0.4s; /* Faster on mobile */
   }
 }
 

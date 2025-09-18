@@ -18,7 +18,7 @@ window.addEventListener("show-sitemap-internal", () => {
   }
 });
 
-// Smooth section-based reveal (early trigger, lightweight)
+// Optimized section-based reveal
 (function initSectionReveal() {
   const reduce =
     window.matchMedia &&
@@ -65,6 +65,7 @@ window.addEventListener("show-sitemap-internal", () => {
     });
   });
 
+  // Optimized intersection observer
   const io = new IntersectionObserver(
     (entries) => {
       entries.forEach((e) => {
@@ -72,14 +73,14 @@ window.addEventListener("show-sitemap-internal", () => {
         const kids = getChildren(e.target);
         kids.forEach((el, i) => {
           if (el.classList.contains("is-visible")) return;
-          const delay = Math.min(i * 50, 250);
+          const delay = Math.min(i * 30, 150); // Reduced delay for faster reveals
           el.style.transitionDelay = `${delay}ms`;
           requestAnimationFrame(() => el.classList.add("is-visible"));
         });
         io.unobserve(e.target);
       });
     },
-    { root: null, rootMargin: "0px 0px -35% 0px", threshold: 0.05 }
+    { root: null, rootMargin: "0px 0px -20% 0px", threshold: 0.1 } // Earlier trigger
   );
 
   sections.forEach((s) => io.observe(s));

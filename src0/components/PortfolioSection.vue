@@ -414,7 +414,7 @@ export default {
 .portfolio-item {
   opacity: 0;
   transform: translateY(30px);
-  animation: fadeInUp 0.6s ease forwards;
+  animation: fadeInUp 0.5s ease forwards;
 }
 
 .portfolio-card {
@@ -427,7 +427,7 @@ export default {
 }
 
 .portfolio-card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-8px);
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
 }
 
@@ -445,7 +445,7 @@ export default {
 }
 
 .portfolio-card:hover .portfolio-image img {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .portfolio-overlay {
@@ -492,7 +492,7 @@ export default {
 }
 
 .portfolio-link:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .portfolio-link svg {
@@ -556,6 +556,10 @@ export default {
   .filter-btn {
     padding: 0.5rem 1rem;
     font-size: 0.875rem;
+  }
+  
+  .portfolio-item {
+    animation-duration: 0.4s; /* Faster on mobile */
   }
 }
 

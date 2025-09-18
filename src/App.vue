@@ -103,7 +103,7 @@ export default {
     const showSitemap = () => {
       showingSitemap.value = true;
       // Scroll to top when showing sitemap
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: "smooth" });
     };
 
     const closeSitemap = () => {
@@ -122,14 +122,18 @@ export default {
 </script>
 
 <style>
+/* استخدم خط Tajawal أولاً ثم Cairo */
 #app {
-  font-family: "Cairo", sans-serif;
+  font-family: "Cairo", "Tajawal", Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* خط خاص للإنجليزية فقط */
+/* خط إنجليزي جميل: Poppins */
+/* خط إنجليزي Sora */
 [dir="ltr"] {
-  font-family: "Inter", sans-serif;
+  font-family: "Sora", Arial, Helvetica, sans-serif;
 }
 
 .main-content {

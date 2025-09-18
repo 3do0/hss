@@ -1,11 +1,5 @@
 <template>
   <section class="hero" id="home">
-    <div class="hero-background">
-      <div class="dotted-pattern"></div>
-      <div class="wave-pattern"></div>
-      <div class="gradient-overlay"></div>
-    </div>
-
     <div class="hero-container">
       <div class="hero-content">
         <div class="hero-text">
@@ -50,9 +44,6 @@
             <div class="ui-card chart-card">
               <div class="chart-container">
                 <div class="pie-chart">
-                  <div class="pie-slice slice-1"></div>
-                  <div class="pie-slice slice-2"></div>
-                  <div class="pie-slice slice-3"></div>
                 </div>
               </div>
               <div class="chart-label">{{ getText("projectGrowth") }}</div>
@@ -194,7 +185,9 @@ export default {
 }
 
 .hero-text {
-  animation: fadeInLeft 1s ease-out;
+  opacity: 0;
+  transform: translateX(-30px);
+  animation: fadeInLeft 0.8s ease-out forwards;
 }
 
 .hero-badge {
@@ -207,18 +200,14 @@ export default {
   font-weight: 600;
   margin-bottom: 1.5rem;
   border: 1px solid rgba(37, 99, 235, 0.2);
-  animation: pulse 2s ease-in-out infinite;
+  transition: all 0.3s ease;
 }
 
 .hero-badge:hover {
   transform: translateY(-3px);
   box-shadow: 0 12px 30px rgba(37, 99, 235, 0.4);
-  background-color: #1e3a8a;
-}
-
-.hero-badge:hover .badge-text {
+  background: #2563eb;
   color: white;
-  transform: translateX(2px);
 }
 
 .hero-title {
@@ -315,7 +304,9 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: fadeInRight 1s ease-out;
+  opacity: 0;
+  transform: translateX(30px);
+  animation: fadeInRight 0.8s ease-out 0.2s forwards;
 }
 
 .main-character {
@@ -330,51 +321,6 @@ export default {
   border-radius: 1.5rem;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   transition: all 0.3s ease;
-}
-
-.character-glow {
-  position: absolute;
-  top: -30px;
-  left: -30px;
-  right: -30px;
-  bottom: -30px;
-  background: 
-    radial-gradient(ellipse 120% 100% at 50% 50%, rgba(37, 99, 235, 0.3) 0%, transparent 70%),
-    linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(59, 130, 246, 0.25), rgba(96, 165, 250, 0.2));
-  border-radius: 2rem;
-  opacity: 0.8;
-  z-index: -1;
-  filter: blur(15px);
-  animation: characterGlow 4s ease-in-out infinite;
-}
-
-.character-glow::before {
-  content: '';
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  right: 10px;
-  bottom: 10px;
-  background: 
-    radial-gradient(ellipse 80% 60% at 30% 30%, rgba(255, 255, 255, 0.4) 0%, transparent 50%),
-    radial-gradient(ellipse 60% 80% at 70% 70%, rgba(96, 165, 250, 0.3) 0%, transparent 60%);
-  border-radius: 1.8rem;
-  filter: blur(8px);
-  animation: characterGlowInner 3s ease-in-out infinite reverse;
-}
-
-.character-glow::after {
-  content: '';
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  right: -10px;
-  bottom: -10px;
-  background: 
-    conic-gradient(from 0deg, rgba(37, 99, 235, 0.4), rgba(59, 130, 246, 0.3), rgba(96, 165, 250, 0.4), rgba(37, 99, 235, 0.4));
-  border-radius: 2.2rem;
-  filter: blur(20px);
-  animation: characterGlowOuter 6s linear infinite;
 }
 
 .floating-elements {
@@ -392,7 +338,7 @@ export default {
   border-radius: 0.75rem;
   padding: 1rem;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  animation: float 3s ease-in-out infinite;
+  animation: float 4s ease-in-out infinite;
   border: 1px solid #e2e8f0;
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
@@ -448,20 +394,6 @@ export default {
 .star {
   color: #fbbf24;
   font-size: 1rem;
-  animation: pulse 2s ease-in-out infinite;
-}
-
-.star:nth-child(2) {
-  animation-delay: 0.2s;
-}
-.star:nth-child(3) {
-  animation-delay: 0.4s;
-}
-.star:nth-child(4) {
-  animation-delay: 0.6s;
-}
-.star:nth-child(5) {
-  animation-delay: 0.8s;
 }
 
 .rating-text,
@@ -489,7 +421,6 @@ export default {
     #60a5fa 240deg 360deg
   );
   position: relative;
-  animation: spin 10s linear infinite;
 }
 
 .pie-chart::after {
@@ -572,43 +503,16 @@ export default {
   height: 4px;
   background: linear-gradient(90deg, #2563eb, #3b82f6);
   border-radius: 2px;
-  animation: codeAnimation 3s ease-in-out infinite;
 }
 
 .code-line.short {
   width: 60%;
 }
 
-.code-line:nth-child(2) {
-  animation-delay: 0.5s;
-}
-.code-line:nth-child(3) {
-  animation-delay: 1s;
-}
-
-@keyframes patternMove {
-  0% {
-    transform: translate(0, 0);
-  }
-  100% {
-    transform: translate(40px, 40px);
-  }
-}
-
-@keyframes waveMove {
-  0%,
-  100% {
-    transform: scale(1) rotate(0deg);
-  }
-  50% {
-    transform: scale(1.1) rotate(2deg);
-  }
-}
-
 @keyframes fadeInLeft {
   from {
     opacity: 0;
-    transform: translateX(-50px);
+    transform: translateX(-30px);
   }
   to {
     opacity: 1;
@@ -619,7 +523,7 @@ export default {
 @keyframes fadeInRight {
   from {
     opacity: 0;
-    transform: translateX(50px);
+    transform: translateX(30px);
   }
   to {
     opacity: 1;
@@ -633,26 +537,7 @@ export default {
     transform: translateY(0px);
   }
   50% {
-    transform: translateY(-10px);
-  }
-}
-
-@keyframes pulse {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+    transform: translateY(-8px);
   }
 }
 
@@ -662,64 +547,6 @@ export default {
   }
   to {
     width: 95%;
-  }
-}
-
-@keyframes codeAnimation {
-  0%,
-  100% {
-    opacity: 0.3;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-@keyframes characterGlow {
-  0%, 100% {
-    opacity: 0.8;
-    transform: scale(1);
-    filter: blur(15px);
-  }
-  25% {
-    opacity: 0.9;
-    transform: scale(1.02);
-    filter: blur(12px);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.05);
-    filter: blur(10px);
-  }
-  75% {
-    opacity: 0.95;
-    transform: scale(1.03);
-    filter: blur(13px);
-  }
-}
-
-@keyframes characterGlowInner {
-  0%, 100% {
-    opacity: 0.6;
-    transform: scale(1) rotate(0deg);
-  }
-  50% {
-    opacity: 0.8;
-    transform: scale(1.1) rotate(2deg);
-  }
-}
-
-@keyframes characterGlowOuter {
-  0% {
-    transform: rotate(0deg);
-    opacity: 0.3;
-  }
-  50% {
-    opacity: 0.5;
-  }
-  100% {
-    transform: rotate(360deg);
-    opacity: 0.3;
   }
 }
 
@@ -738,13 +565,6 @@ export default {
   .character-img {
     width: 300px;
     height: 450px;
-  }
-  
-  .character-glow {
-    top: -25px;
-    left: -25px;
-    right: -25px;
-    bottom: -25px;
   }
 }
 
@@ -776,18 +596,16 @@ export default {
     width: 250px;
     height: 350px;
   }
-  
-  .character-glow {
-    top: -20px;
-    left: -20px;
-    right: -20px;
-    bottom: -20px;
-  }
 
   .ui-card {
     padding: 0.5rem;
     font-size: 0.8rem;
     transform: scale(0.9);
+  }
+  
+  /* Disable floating animation on mobile for better performance */
+  .ui-card {
+    animation: none;
   }
 }
 
@@ -803,13 +621,6 @@ export default {
   .character-img {
     width: 220px;
     height: 320px;
-  }
-  
-  .character-glow {
-    top: -15px;
-    left: -15px;
-    right: -15px;
-    bottom: -15px;
   }
 
   .ui-card {
