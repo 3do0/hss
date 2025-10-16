@@ -122,16 +122,12 @@ export default {
 </script>
 
 <style>
-/* استخدم خط Tajawal أولاً ثم Cairo */
 #app {
-  font-family: "Cairo", "Tajawal", Arial, Helvetica, sans-serif;
+  font-family: "IBM Plex Sans Arabic", "Cairo", Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* خط خاص للإنجليزية فقط */
-/* خط إنجليزي جميل: Poppins */
-/* خط إنجليزي Sora */
 [dir="ltr"] {
   font-family: "Sora", Arial, Helvetica, sans-serif;
 }
